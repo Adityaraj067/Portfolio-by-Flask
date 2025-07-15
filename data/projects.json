@@ -1,0 +1,16 @@
+[
+  {
+    "name": "IPL Data Analysis",
+    "description": "Analyzed IPL data using Excel to uncover toss decision patterns.",
+    "tech_stack": "Excel, Pivot Tables, Charts",
+    "github": "https://github.com/aditya/ipl-analysis",
+    "demo": "#"
+  },
+  {
+    "name": "Hotel Booking Analysis",
+    "description": "Python-based analysis on hotel cancellations and trends.",
+    "tech_stack": "Python, Pandas, Matplotlib",
+    "github": "https://github.com/aditya/hotel-booking",
+    "demo": "#"
+  }
+]

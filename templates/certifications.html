@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+  <h2 class="section-title">🏆 Certifications</h2>
+
+  <div id="cert-sort-btns">
+    <button class="sort-btn" onclick="sortCerts('desc')">🔽 Latest First</button>
+    <button class="sort-btn" onclick="sortCerts('asc')">🔼 Oldest First</button>
+  </div>
+
+  <div id="cert-container" class="cert-card-grid">
+    <!-- Certificates will be injected here via JavaScript -->
+  </div>
+</section>
+
+<script>
+  const certificates = [
+    {
+      title: "Data Analysis with Tableau",
+      desc: "Built interactive dashboards and analyzed business trends.",
+      date: "2024-11",
+      file: "data_analysis_tableau.pdf",
+      thumbnail: "tableau_thumb.jpg",
+      source: "coursera"
+    },
+    {
+      title: "Excel Skills for Business",
+      desc: "Learned Excel formulas, pivot tables, and charts.",
+      date: "2024-04",
+      file: "excel_skills_business.pdf",
+      thumbnail: "excel_thumb.jpg",
+      source: "coursera"
+    },
+    {
+      title: "Data Science with R",
+      desc: "Covered R basics, wrangling, visualization, stats.",
+      date: "2024-03",
+      file: "data_science_r.pdf",
+      thumbnail: "r_thumb.jpg",
+      source: "coursera"
+    },
+    {
+      title: "IBM DevOps and Software Engineering",
+      desc: "Learned DevOps practices, CI/CD, and Agile methodologies.",
+      date: "2023-11",
+      file: "docker_certificate.pdf",
+      thumbnail: "docker_thumb.jpg",
+      source: "internal"
+    },
+   
+  ];
+
+  function renderCerts(sortedCerts) {
+    const container = document.getElementById("cert-container");
+    container.innerHTML = "";
+    sortedCerts.forEach(cert => {
+      container.innerHTML += `
+        <div class="cert-card animate-fade">
+          <h3>${cert.title} ${cert.source === 'coursera' ? '<img src="/static/icons/coursera.svg" class="badge" />' : ''}</h3>
+          <p>${cert.desc}</p>
+          <p class="cert-date"><strong>Date:</strong> ${cert.date}</p>
+          <div class="cert-buttons">
+            <a href="/static/certificates/${cert.file}" target="_blank" class="btn">👁️ View</a>
+            <a href="/static/certificates/${cert.file}" download class="btn">⬇️ Download</a>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function sortCerts(order) {
+    const sorted = certificates.sort((a, b) => {
+      return order === "asc"
+        ? new Date(a.date) - new Date(b.date)
+        : new Date(b.date) - new Date(a.date);
+    });
+    renderCerts(sorted);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    sortCerts("desc"); // default sort
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('skills') }}">Skills</a>
+    <a href="{{ url_for('projects') }}">Projects</a>
+    <a href="{{ url_for('education') }}">Education</a>
+
+    <a href="{{ url_for('blog') }}">Blog</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    
+    <a href="{{ url_for('certifications') }}">Certifications</a>
+
+  </nav>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+  <script>
+  const typedText = document.getElementById("typed-text");
+  const phrases = ["a Data Analyst", "a Web Developer", "a Python Enthusiast"];
+  let currentPhrase = 0, currentChar = 0, isDeleting = false;
+
+  function type() {
+    const phrase = phrases[currentPhrase];
+    if (isDeleting) {
+      currentChar--;
+    } else {
+      currentChar++;
+    }
+
+    typedText.textContent = phrase.substring(0, currentChar);
+
+    if (!isDeleting && currentChar === phrase.length) {
+      isDeleting = true;
+      setTimeout(type, 1000);
+    } else if (isDeleting && currentChar === 0) {
+      isDeleting = false;
+      currentPhrase = (currentPhrase + 1) % phrases.length;
+      setTimeout(type, 300);
+    } else {
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", type);
+
+</script>
+  <script src="{{ url_for('static', filename='certifications.js') }}"></script>
+
+</html>
